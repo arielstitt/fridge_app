@@ -50,11 +50,10 @@ def run_tracker
     Fridge.find_by_brand(delete).destroy
   end
 end
-
+#========PART 2===============================#
 def checkout_fridge(fridge_id)
   id = fridge_id
   
-  # Fridge.find(id)
   # Find and Print a Fridge
   puts <<~HEREDOC
          What would you like to do with the fridge?
@@ -66,12 +65,10 @@ def checkout_fridge(fridge_id)
   user_descision = gets.chomp.to_i
   if user_descision == 1
     p Fridge.find(id).foods.all
-    # food = Firdge.find(id)
-    # puts find_fridge.food
 end
-# if user_descision == 2
-#   puts fridge.drinks
-# end
+if user_descision == 2
+  p Fridge.find(id).drinks.all
+end
 # if user_descision == 3
 # end
          end

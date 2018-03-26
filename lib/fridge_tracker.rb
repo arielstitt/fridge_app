@@ -10,9 +10,12 @@ def run_tracker
          Select a number:
        HEREDOC
   user_descision = gets.chomp.to_i
-  
   if user_descision == 1
     p Fridge.all
+    puts "Enter ID number of fridge"
+    fridge_id = gets.chomp.to_i
+    checkout_fridge(fridge_id)
+
   elsif user_descision == 2
     puts "what is the Brand Name?"
     brand = gets.chomp
@@ -33,23 +36,25 @@ def run_tracker
     drink_input = gets.chomp
     if drink_input == 't'
      drink_input = true
+
     elsif drink_input == "f"
       drink_input = false
     end 
   Fridge.create(brand: brand, location: location, size: size, has_food_in_it: food_input, has_drinks_in_it: drink_input)
-  else user_descision == 3
+  elsif user_descision == 3
     # print out all the fridges
    p Fridge.all.select("brand", "location")
     # user selects which fridge they want to delete
     puts "which fridge would you like to delete?"
     delete = gets.chomp
+    Fridge.find_by_brand(delete).destroy
   end
-  Fridge.find_by_brand(delete).destroy
-
 end
+
 def checkout_fridge(fridge_id)
   id = fridge_id
   
+  # Fridge.find(id)
   # Find and Print a Fridge
   puts <<~HEREDOC
          What would you like to do with the fridge?
@@ -59,8 +64,17 @@ def checkout_fridge(fridge_id)
          select a number:
        HEREDOC
   user_descision = gets.chomp.to_i
-  # Your code
+  if user_descision == 1
+    p Fridge.find(id).foods.all
+    # food = Firdge.find(id)
+    # puts find_fridge.food
 end
+# if user_descision == 2
+#   puts fridge.drinks
+# end
+# if user_descision == 3
+# end
+         end
 def run_food_menu(fridge)
   fridge = fridge
   puts <<~HEREDOC
@@ -70,6 +84,7 @@ def run_food_menu(fridge)
          4. Go Back to Fridge Menu
          Select a number:
        HEREDOC
+       
   user_descision = gets.chomp.to_i
   # Your Code Here
 end
@@ -86,4 +101,5 @@ def run_drink_menu(fridge)
   user_descision = gets.chomp.to_i
   # Your Code Here
 end
+
 run_tracker

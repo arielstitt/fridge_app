@@ -69,8 +69,20 @@ end
 if user_descision == 2
   p Fridge.find(id).drinks.all
 end
-# if user_descision == 3
-# end
+if user_descision == 3
+  puts "Would you like to see the food menu? y/n"
+  user_descision = gets.chomp
+  fridge = Fridge.find(id)
+  if user_descision == "y"
+    run_food_menu(fridge)
+  else 
+    puts "would you like to see the drink menu? y/n"
+    fridge = gets.chomp
+    run_drink_menu(fridge) 
+  end
+ 
+  
+end
          end
 def run_food_menu(fridge)
   fridge = fridge
